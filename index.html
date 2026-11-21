@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Precise Clicker – One tap, exactly on time | Android App</title>
+<meta name="description" content="Precise Clicker schedules one perfectly timed tap on any screen point, synced with internet time. Free Android app, no ads, no data collection.">
+<meta name="theme-color" content="#070B16">
+<meta property="og:title" content="Precise Clicker – One tap, exactly on time">
+<meta property="og:description" content="Millisecond-accurate scheduled tap for Android, synced with internet time. Free download.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322D3EE' stroke-width='1.8'%3E%3Ccircle cx='12' cy='12' r='7'/%3E%3Cpath d='M12 2v5M12 17v5M2 12h5M17 12h5'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#070B16;--bg2:#101A38;--surface:#131C33;--alt:#1A2644;--stroke:#26324F;--p:#22D3EE;--p2:#3B82F6;--t1:#F1F5FF;--t2:#A9B4D0;--t3:#707C9C;--ok:#34D399;--amber:#FFB84D;--r:22px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 500px at 15% -5%,rgba(34,211,238,.16),transparent 60%),radial-gradient(800px 500px at 100% 10%,rgba(59,130,246,.18),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg2))}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,92%);margin:auto}
+svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.grad{background:linear-gradient(90deg,var(--p),var(--p2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,11,22,.72);border-bottom:1px solid rgba(38,50,79,.7)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem}
+.brand svg{width:30px;height:30px;color:var(--p)}
+.links{display:flex;gap:28px;color:var(--t2);font-size:.95rem;font-weight:500}
+.links a:hover{color:var(--t1)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:16px;font-weight:700;font-size:1rem;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.btn.p{background:linear-gradient(90deg,var(--p),var(--p2));color:#04141C;box-shadow:0 10px 30px -8px rgba(34,211,238,.5)}
+.btn.p:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(34,211,238,.65)}
+.btn.g{background:rgba(34,211,238,.08);border-color:rgba(34,211,238,.5);color:var(--p)}
+.btn.g:hover{background:rgba(34,211,238,.16)}
+.btn.sm{height:42px;padding:0 20px;font-size:.92rem;border-radius:12px}
+.btn.lg{height:62px;padding:0 38px;font-size:1.1rem;border-radius:18px}
+
+/* hero */
+.hero{padding:76px 0 56px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.35);color:var(--p);font-size:.85rem;font-weight:700}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.05;letter-spacing:-.03em;font-weight:800;margin:20px 0 18px}
+.lead{font-size:clamp(1.02rem,2vw,1.2rem);color:var(--t2);max-width:560px}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 18px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--t3);font-size:.88rem}
+.meta b{color:var(--t2);font-weight:600}
+.trust{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:22px;color:var(--t2);font-size:.92rem}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust svg{width:18px;height:18px;color:var(--ok)}
+
+/* phone mock */
+.phone-wrap{display:flex;justify-content:center;position:relative}
+.phone-wrap:before{content:"";position:absolute;width:75%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);filter:blur(30px);top:12%}
+.phone{position:relative;width:min(300px,78vw);aspect-ratio:9/18.5;border-radius:42px;padding:10px;background:linear-gradient(160deg,#27324f,#0e1426);border:1px solid #33425f;box-shadow:0 40px 80px -20px rgba(0,0,0,.7);animation:float 6s ease-in-out infinite}
+.screen{height:100%;border-radius:33px;overflow:hidden;background:linear-gradient(180deg,#070B16,#101A38);padding:20px 14px 12px;display:flex;flex-direction:column;gap:11px;position:relative}
+.screen:before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:70px;height:16px;border-radius:12px;background:#000}
+.m-head{display:flex;align-items:center;gap:8px;margin-top:14px}
+.m-head svg{width:22px;height:22px;color:var(--p)}
+.m-head b{font-size:.82rem;display:block;line-height:1.1}
+.m-head small{font-size:.58rem;color:var(--t2)}
+.m-head em{margin-left:auto;font-style:normal;font-size:.55rem;font-weight:700;color:var(--ok);background:rgba(52,211,153,.14);padding:3px 8px;border-radius:99px}
+.m-card{border-radius:16px;padding:12px;border:1px solid var(--stroke);background:var(--surface)}
+.m-hero{background:linear-gradient(135deg,#18305E,#101C3A);border-color:#2F4A85;text-align:center}
+.m-lbl{font-size:.52rem;letter-spacing:.14em;color:var(--t2);font-weight:700}
+#mockClock{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:800;font-size:1.28rem;margin:6px 0 2px;white-space:nowrap}
+.m-ok{font-size:.55rem;color:var(--ok)}
+.m-fields{display:flex;gap:5px;margin-top:8px}
+.m-fields div{flex:1;text-align:center;padding:7px 0;border-radius:9px;background:var(--alt);border:1px solid var(--stroke);font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:.78rem}
+.m-btn{margin-top:auto;height:38px;border-radius:12px;background:linear-gradient(90deg,var(--p),var(--p2));color:#04141C;font-weight:800;font-size:.7rem;display:flex;align-items:center;justify-content:center}
+.m-nav{display:flex;justify-content:space-around;font-size:.5rem;color:var(--t3);padding-top:8px;border-top:1px solid var(--stroke)}
+.m-nav .on{color:var(--p);font-weight:700}
+.float-pill{position:absolute;right:-6%;bottom:22%;padding:10px 14px;border-radius:16px;background:rgba(11,18,36,.88);border:1px solid rgba(34,211,238,.5);backdrop-filter:blur(8px);font-size:.78rem;font-weight:700;display:flex;gap:8px;align-items:center;animation:float 5s ease-in-out infinite reverse}
+.float-pill b{color:var(--amber);font-family:ui-monospace,Menlo,monospace}
+@keyframes float{50%{transform:translateY(-12px)}}
+
+/* sections */
+section{padding:84px 0}
+.sec-h{text-align:center;max-width:680px;margin:0 auto 48px}
+.sec-h small{color:var(--p);font-weight:800;letter-spacing:.14em;font-size:.78rem}
+.sec-h h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;letter-spacing:-.02em;margin:10px 0 12px}
+.sec-h p{color:var(--t2)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:linear-gradient(180deg,rgba(26,38,68,.55),rgba(19,28,51,.85));border:1px solid var(--stroke);border-radius:var(--r);padding:26px;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-5px);border-color:rgba(34,211,238,.55)}
+.ico{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:rgba(34,211,238,.12);color:var(--p);margin-bottom:16px}
+.card h3{font-size:1.1rem;margin-bottom:6px}
+.card p{color:var(--t2);font-size:.95rem}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.step{position:relative;padding:26px;border-radius:var(--r);border:1px solid var(--stroke);background:var(--surface)}
+.step:before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2));color:#04141C;font-weight:800;margin-bottom:14px}
+.step h3{font-size:1.05rem;margin-bottom:6px}.step p{color:var(--t2);font-size:.92rem}
+
+/* install */
+.install{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.panel{border-radius:28px;padding:34px;border:1px solid #2F4A85;background:linear-gradient(135deg,#18305E,#101C3A)}
+.panel h3{font-size:1.5rem;margin-bottom:8px}
+.panel p{color:var(--t2)}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.spec div{padding:14px;border-radius:14px;background:rgba(7,11,22,.45);border:1px solid rgba(255,255,255,.08)}
+.spec small{display:block;color:var(--t3);font-size:.78rem}.spec b{font-size:1.05rem}
+.ol{list-style:none;display:grid;gap:14px}
+.ol li{display:flex;gap:14px;padding:18px;border-radius:18px;border:1px solid var(--stroke);background:var(--surface)}
+.ol li>span{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:var(--p);background:rgba(34,211,238,.13)}
+.ol b{display:block;margin-bottom:2px}.ol p{color:var(--t2);font-size:.92rem}
+
+/* faq */
+.faq{max-width:780px;margin:auto;display:grid;gap:12px}
+details{border:1px solid var(--stroke);border-radius:18px;background:var(--surface);padding:4px 22px;transition:border-color .2s}
+details[open]{border-color:rgba(34,211,238,.5)}
+summary{cursor:pointer;list-style:none;font-weight:700;padding:16px 0;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--p);font-size:1.4rem;line-height:1}
+details[open] summary:after{content:"–"}
+details p{color:var(--t2);padding-bottom:18px;font-size:.96rem}
+
+/* dev + cta */
+.dev{display:flex;gap:22px;align-items:center;max-width:780px;margin:auto;padding:28px;border-radius:26px;border:1px solid var(--stroke);background:var(--surface)}
+.av{flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:1.6rem;color:#04141C;background:linear-gradient(135deg,var(--p),var(--p2))}
+.dev h3{font-size:1.2rem}.dev small{color:var(--p);font-weight:700}.dev p{color:var(--t2);font-size:.95rem;margin-top:6px}
+.final{text-align:center;padding:60px 28px;border-radius:32px;border:1px solid #2F4A85;background:radial-gradient(600px 240px at 50% 0,rgba(34,211,238,.22),transparent 70%),linear-gradient(135deg,#18305E,#101C3A)}
+.final h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;margin-bottom:12px}
+.final p{color:var(--t2);max-width:520px;margin:0 auto 26px}
+footer{padding:36px 0 44px;border-top:1px solid var(--stroke);color:var(--t3);font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer p+p{max-width:520px}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
+@media(max-width:960px){.hero .wrap,.install{grid-template-columns:1fr}.hero{padding-top:44px}.grid3{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.links{display:none}.float-pill{right:4%}}
+@media(max-width:600px){section{padding:60px 0}.grid3,.steps{grid-template-columns:1fr}.btn.lg,.cta .btn{width:100%}.panel{padding:24px}.dev{flex-direction:column;text-align:center}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3zM9 12l2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M12 21a9 9 0 100-18 9 9 0 000 18zM9 12l2 2 4-4"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand"><svg class="i"><use href="#i-target"/></svg>Precise Clicker</a>
+    <nav class="links"><a href="#features">Features</a><a href="#how">How it works</a><a href="#install">Install</a><a href="#faq">FAQ</a></nav>
+    <!-- DOWNLOAD BUTTON #1 (navbar) -->
+    <a class="btn p sm dl" href="Precise Clicker.apk" download><svg class="i" style="width:18px;height:18px"><use href="#i-dl"/></svg>Download</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="badge"><i></i>Free for Android · v<span data-v="VERSION">1.0</span></span>
+      <h1>One tap.<br><span class="grad">Exactly on time.</span></h1>
+      <p class="lead">Precise Clicker schedules a single, perfectly timed tap on any screen point, synced with real internet time instead of your phone clock.</p>
+      <div class="cta">
+        <!-- DOWNLOAD BUTTON #2 (hero – main button) -->
+        <a class="btn p lg dl" href="Precise Clicker.apk" download><svg class="i"><use href="#i-dl"/></svg>Download APK</a>
+        <a class="btn g lg" href="#how">See how it works</a>
+      </div>
+      <div class="meta"><span>Version <b data-v="VERSION">1.0</b></span><span>Size <b data-v="SIZE">6 MB</b></span><span>Android <b data-v="MIN_ANDROID">7.0</b>+</span><span>Updated <b data-v="UPDATED">2026</b></span></div>
+      <div class="trust">
+        <span><svg class="i"><use href="#i-check"/></svg>No ads</span>
+        <span><svg class="i"><use href="#i-check"/></svg>No data collection</span>
+        <span><svg class="i"><use href="#i-check"/></svg>Free to use</span>
+      </div>
+    </div>
+
+    <div class="phone-wrap" aria-hidden="true">
+      <div class="phone"><div class="screen">
+        <div class="m-head"><svg class="i"><use href="#i-target"/></svg><div><b>Precise Clicker</b><small>One tap, exactly on time</small></div><em>● Synced</em></div>
+        <div class="m-card m-hero"><div class="m-lbl">INTERNET TIME</div><div id="mockClock">00:00:00.000</div><div class="m-ok">● Synced +12 ms · ±18 · 5 srv</div></div>
+        <div class="m-card"><div class="m-lbl">TARGET TIME</div><div class="m-fields"><div>20</div><div>30</div><div>00</div><div>040</div></div></div>
+        <div class="m-btn">▶ Start Floating Controller</div>
+        <div class="m-nav"><span class="on">Home</span><span>Setup</span><span>Help</span><span>About</span></div>
+      </div>
+      <div class="float-pill"><svg class="i" style="width:18px;height:18px;color:var(--amber)"><use href="#i-clock"/></svg>Armed <b>00:12.4</b></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-h rv"><small>FEATURES</small><h2>Built for timing that actually matters</h2><p>Everything you need to land a tap at the exact moment, nothing you do not.</p></div>
+    <div class="grid3">
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-clock"/></svg></div><h3>Internet-synced time</h3><p>Syncs with 5 global NTP servers and picks the most accurate result, so your phone clock never matters.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-bolt"/></svg></div><h3>Millisecond precision</h3><p>A hybrid sleep-and-spin timer fires within a few milliseconds of your target time.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-layers"/></svg></div><h3>Floating glass controller</h3><p>A small draggable icon expands into a clean control panel on top of any app or game.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-target"/></svg></div><h3>Draggable crosshair</h3><p>Drop it exactly on the button you need, lock it, and the app remembers the spot.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-shield"/></svg></div><h3>Built-in safeguards</h3><p>Auto re-sync, wake lock, battery guidance and clear errors if time sync ever fails.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-check"/></svg></div><h3>Test before you commit</h3><p>Run a test tap, practise with a 30-second timer and fine-tune your tap lead time.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-h rv"><small>HOW IT WORKS</small><h2>Ready in four simple steps</h2></div>
+    <div class="steps">
+      <div class="step rv"><h3>Finish setup</h3><p>Grant the few permissions once from the Setup tab. Each item shows Ready when done.</p></div>
+      <div class="step rv"><h3>Set the time</h3><p>Enter the exact target time, down to the millisecond, and save it.</p></div>
+      <div class="step rv"><h3>Place the target</h3><p>Start the floating controller, drag the crosshair onto your button and lock it.</p></div>
+      <div class="step rv"><h3>Arm it</h3><p>Press ARM. The panel shrinks to a tiny timer and the tap happens by itself.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap install">
+    <div class="panel rv">
+      <h3>Get Precise Clicker</h3>
+      <p>Direct APK download. Install it in under a minute.</p>
+      <div class="spec">
+        <div><small>Version</small><b data-v="VERSION">1.0</b></div>
+        <div><small>Size</small><b data-v="SIZE">6 MB</b></div>
+        <div><small>Requires</small><b>Android <span data-v="MIN_ANDROID">7.0</span>+</b></div>
+        <div><small>Price</small><b>Free</b></div>
+      </div>
+      <!-- DOWNLOAD BUTTON #3 (install panel) -->
+      <a class="btn p lg dl" style="width:100%" href="Precise Clicker.apk" download><svg class="i"><use href="#i-dl"/></svg>Download APK</a>
+    </div>
+    <ol class="ol rv">
+      <li><span>1</span><div><b>Download the APK</b><p>Tap the download button and open the file when it finishes.</p></div></li>
+      <li><span>2</span><div><b>Allow installation</b><p>If Android asks, allow installs from your browser or file manager, then tap Install.</p></div></li>
+      <li><span>3</span><div><b>Grant permissions</b><p>Open the app, go to Setup and enable the items shown. For the Tap service on Android 13+, use App info › ⋮ › Allow restricted settings first.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-h rv"><small>FAQ</small><h2>Questions, answered</h2></div>
+    <div class="faq rv">
+      <details><summary>Does the app read my screen or collect data?</summary><p>No. The Tap service only performs one tap at the point you choose. The app contains no ads and collects no personal data. It uses the internet only to check the time.</p></details>
+      <details><summary>Why does it need the Accessibility service?</summary><p>Android only allows an app to perform taps for you through the Accessibility service. It is used solely for the single scheduled tap.</p></details>
+      <details><summary>How accurate is it?</summary><p>Timing is usually within a few milliseconds of the target. Real-world results also depend on network jitter and your device, so the app includes a lead-time setting and a test tap to fine-tune it.</p></details>
+      <details><summary>Will it work in every game or app?</summary><p>Most apps accept it, but some games and secure screens block automated taps. Always try the Test tap button first.</p></details>
+      <details><summary>Is it free?</summary><p>Yes, completely free.</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="dev rv">
+      <div class="av">ZA</div>
+      <div><small>DEVELOPED AND DESIGNED BY</small><h3>Muhammad Zubair Afridi</h3><p>Full-Stack Web, Mobile App and Software Developer, building fast, reliable and good-looking products.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap"><div class="final rv">
+    <h2>Never miss the <span class="grad">perfect moment</span> again</h2>
+    <p>Download Precise Clicker and schedule your next tap with true internet time.</p>
+    <!-- DOWNLOAD BUTTON #4 (bottom call-to-action) -->
+    <a class="btn p lg dl" href="Precise Clicker.apk" download><svg class="i"><use href="#i-dl"/></svg>Download APK</a>
+  </div></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Precise Clicker. Developed and Designed by Zubair Afridi.</p>
+    <p>Use responsibly. Some apps and games restrict automated input; you are responsible for following their terms.</p>
+  </div>
+</footer>
+
+<script>
+/* ============ EDIT HERE: your download link and app details ============ */
+const CONFIG = {
+  APK_URL: "Precise Clicker.apk",   // <-- PUT YOUR APK LINK HERE (file name or full https:// link)
+  VERSION: "1.0",
+  SIZE: "6 MB",
+  MIN_ANDROID: "7.0",
+  UPDATED: "November 2026"
+};
+/* ======================================================================= */
+
+document.querySelectorAll("a.dl").forEach(a => { a.href = CONFIG.APK_URL; a.setAttribute("download", ""); });
+document.querySelectorAll("[data-v]").forEach(el => { el.textContent = CONFIG[el.dataset.v]; });
+
+const pad = (n, l = 2) => String(n).padStart(l, "0");
+const clk = document.getElementById("mockClock");
+setInterval(() => {
+  const d = new Date();
+  clk.textContent = pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds()) + "." + pad(d.getMilliseconds(), 3);
+}, 40);
+
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
